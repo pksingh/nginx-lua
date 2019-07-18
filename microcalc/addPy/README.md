@@ -59,3 +59,26 @@ C:\Users\Home\Desktop\uservices>curl http://localhost:8081/api/v1/status
 }
 
 ```
+
+---
+
+```
+ * Running on http://0.0.0.0:8081/ (Press CTRL+C to quit)
+Received body: {'operands': [1, 3, 5]}
+127.0.0.1 - - [11/Jul/2019 21:20:45] "POST /api/v1/add HTTP/1.1" 200 -
+Received body: None
+127.0.0.1 - - [11/Jul/2019 21:21:28] "POST /api/v1/add HTTP/1.1" 200 -
+
+```
+
+```
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8081/api/v1/add -H "Content-Type: application/json" -d "{ \"operands\": [1,3] }"
+null
+
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8081/api/v1/add -d "{ \"operands\": [1,3] }"
+null
+
+C:\Users\Home\Desktop\uservices>
+```
+
+---
