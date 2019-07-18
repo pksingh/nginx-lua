@@ -82,3 +82,31 @@ C:\Users\Home\Desktop\uservices>
 ```
 
 ---
+
+```
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 230-188-425
+ * Running on http://0.0.0.0:8081/ (Press CTRL+C to quit)
+Received body: None
+127.0.0.1 - - [13/Jul/2019 19:57:02] "POST /api/v1/add HTTP/1.1" 400 -
+
+Received body: {'operands': [1, 3]}
+Received 1 3
+127.0.0.1 - - [14/Jul/2019 10:59:54] "POST /api/v1/add HTTP/1.1" 200 -
+```
+
+```
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8081/api/v1/add -d "{ \"operands\": [1,3] }"
+{
+    "error": "Invalid Input",
+    "service": "name: add, version: v1"
+}
+
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8081/api/v1/add -H "Content-Type: application/json" -d "{ \"operands\": [1,3] }"
+null
+
+C:\Users\Home\Desktop\uservices>
+```
+
+---
