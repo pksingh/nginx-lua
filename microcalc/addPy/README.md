@@ -110,3 +110,37 @@ C:\Users\Home\Desktop\uservices>
 ```
 
 ---
+
+```
+127.0.0.1 - - [14/Jul/2019 21:03:53] "POST /api/v1/add HTTP/1.1" 400 -
+Received body: {'operands': [1, 3, 4]}
+127.0.0.1 - - [14/Jul/2019 21:05:01] "POST /api/v1/add HTTP/1.1" 400 -
+Received body: {'operands': [1, 3]}
+Received 1 3
+127.0.0.1 - - [14/Jul/2019 21:05:20] "POST /api/v1/add HTTP/1.1" 200 -
+```
+
+```
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8081/api/v1/add -H "Content-Type: application/json" -d "{ \"operands\": ['1',3] }" 
+{
+    "message": "Failed to decode JSON object: Expecting value: line 1 column 16 (char 15)"      
+}
+
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8081/api/v1/add -H "Content-Type: application/json" -d "{ \"operands\": [1,3,4] }"
+{
+    "error": "Invalid Input",
+    "service": "name: add, version: v1"
+}
+
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8081/api/v1/add -H "Content-Type: application/json" -d "{ \"operands\": [1,3] }"
+{
+    "result": 4,
+    "operands": [
+        1,
+        3
+    ],
+    "service": "name: add, version: v1"
+}
+
+C:\Users\Home\Desktop\uservices>
+```
