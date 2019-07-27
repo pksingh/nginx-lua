@@ -23,6 +23,12 @@ class PostSub(Resource):
         ops = body['operands'] if body is not None else []
         print('Received body: {}'.format(body))
 
+        if (len(ops) != 2 or int(ops[1]) == 0):
+            return abort(400, error='Invalid Input', service=APP_SERVICE)
+
+        op1,op2 = ops
+        print('Received {} {}'.format(op1, op2))
+
 api.add_resource(GetStatus, APP_BASEPATH + '/status')
 api.add_resource(PostSub, APP_BASEPATH + '/sub')
 
