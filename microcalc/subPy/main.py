@@ -29,6 +29,15 @@ class PostSub(Resource):
         op1,op2 = ops
         print('Received {} {}'.format(op1, op2))
 
+        op1 = int(op1)
+        op2 = int(op2)
+
+        return {
+            'result': int(op1-op2),
+            'operands': [op1,op2],
+            'service': APP_SERVICE
+        }
+
 api.add_resource(GetStatus, APP_BASEPATH + '/status')
 api.add_resource(PostSub, APP_BASEPATH + '/sub')
 
