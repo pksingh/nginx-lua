@@ -18,8 +18,12 @@ func main() {
 		fmt.Print("calc>")
 		for scanner.Scan() {
 			fmt.Println("exp:", scanner.Text())
-			res, _ := processStack(scanner.Text())
-			fmt.Println(res)
+			res, err := processStack(scanner.Text())
+			if err != nil {
+				fmt.Println(err)
+			} else {
+				fmt.Println(res)
+			}
 			fmt.Print("calc>")
 		}
 	}
