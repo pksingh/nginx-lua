@@ -8,6 +8,11 @@ import (
 	"strings"
 )
 
+// parseArgs() : validate Arguments by parsing as number
+func parseArgs(c []string) (float64, float64, error) {
+	return 0.0, 0.0, nil
+}
+
 // processStack() : processes the string expression
 func processStack(e string) (float64, error) {
 	result := 0.0
@@ -18,6 +23,11 @@ func processStack(e string) (float64, error) {
 	if len(c)-1 < 2 {
 		return 0.0, errors.New("error: missing arguments (pass space between number and symbols)")
 	}
+	num1, num2, err := parseArgs(c)
+	if err != nil {
+		return 0.0, err
+	}
+	fmt.Println("num1:", num1, " num2:", num2)
 	return result, nil
 }
 
