@@ -5,12 +5,21 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
 // parseArgs() : validate Arguments by parsing as number
 func parseArgs(c []string) (float64, float64, error) {
-	return 0.0, 0.0, nil
+	num1, err := strconv.ParseFloat(c[0], 64)
+	if err != nil {
+		return 0.0, 0.0, err
+	}
+	num2, err := strconv.ParseFloat(c[2], 64)
+	if err != nil {
+		return 0.0, 0.0, err
+	}
+	return num1, num2, nil
 }
 
 // processStack() : processes the string expression
