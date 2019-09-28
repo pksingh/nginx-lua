@@ -37,6 +37,11 @@ func processStack(e string) (float64, error) {
 		return 0.0, err
 	}
 	fmt.Println("num1:", num1, " num2:", num2)
+
+	switch c[1] {
+	case "+":
+		result = num1 + num2
+	}
 	return result, nil
 }
 
