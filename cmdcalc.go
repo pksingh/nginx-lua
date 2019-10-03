@@ -42,6 +42,10 @@ func processStack(e string) (float64, error) {
 	case "*":
 		result = num1 * num2
 	case "/":
+		if num2 == 0.0 {
+			return 0.0, errors.New("error: you tried to divide by zero.")
+		}
+		result = num1 / num2
 	case "+":
 		result = num1 + num2
 	case "-":
