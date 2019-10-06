@@ -50,6 +50,8 @@ func processStack(e string) (float64, error) {
 		result = num1 + num2
 	case "-":
 		result = num1 - num2
+	default:
+		return 0.0, errors.New("error: operator not from ( + - * / )")
 	}
 	return result, nil
 }
