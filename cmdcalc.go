@@ -25,10 +25,10 @@ func parseArgs(c []string) (float64, float64, error) {
 // processStack() : processes the string expression
 func processStack(e string) (float64, error) {
 	result := 0.0
-	fmt.Printf("Passed Arg: %#v, Len: %d\n", e, len(e))
+	// fmt.Printf("Passed Arg: %#v, Len: %d\n", e, len(e))
 
 	c := strings.Split(e, " ")
-	fmt.Println("Arg:", e, " len:", len(c))
+	// fmt.Println("Arg:", e, " len:", len(c))
 	if len(c)-1 < 2 {
 		return 0.0, errors.New("error: missing arguments (pass space between number and symbols)")
 	}
@@ -36,7 +36,7 @@ func processStack(e string) (float64, error) {
 	if err != nil {
 		return 0.0, err
 	}
-	fmt.Println("num1:", num1, " num2:", num2)
+		// fmt.Println("num1:", num1, " num2:", num2)
 
 	switch c[1] {
 	case "*":
@@ -61,7 +61,7 @@ func main() {
 		scanner := bufio.NewScanner(os.Stdin)
 		fmt.Print("calc>")
 		for scanner.Scan() {
-			fmt.Println("exp:", scanner.Text())
+			// fmt.Println("exp:", scanner.Text())
 			res, err := processStack(scanner.Text())
 			if err != nil {
 				fmt.Println(err)
