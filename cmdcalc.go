@@ -32,26 +32,32 @@ func processStack(e string) (float64, error) {
 	if len(c)-1 < 2 {
 		return 0.0, errors.New("error: missing arguments (pass space between number and symbols)")
 	}
-	num1, num2, err := parseArgs(c)
-	if err != nil {
-		return 0.0, err
-	}
+
+	for len(c) > 2 {
+		num1, num2, err := parseArgs(c)
+		if err != nil {
+			return 0.0, err
+		}
 		// fmt.Println("num1:", num1, " num2:", num2)
 
-	switch c[1] {
-	case "*":
-		result = num1 * num2
-	case "/":
-		if num2 == 0.0 {
-			return 0.0, errors.New("error: you tried to divide by zero.")
+		switch c[1] {
+		case "*":
+			result = num1 * num2
+		case "/":
+			if num2 == 0.0 {
+				return 0.0, errors.New("error: you tried to divide by zero.")
+			}
+			result = num1 / num2
+		case "+":
+			result = num1 + num2
+		case "-":
+			result = num1 - num2
+		default:
+			return 0.0, errors.New("error: operator not from ( + - * / )")
 		}
-		result = num1 / num2
-	case "+":
-		result = num1 + num2
-	case "-":
-		result = num1 - num2
-	default:
-		return 0.0, errors.New("error: operator not from ( + - * / )")
+		res := fmt.Sprintf("%f", result)
+		c[2] = res
+		c = c[2:]
 	}
 	return result, nil
 }
