@@ -20,6 +20,7 @@ type XRecord struct {
 	evalMin               bool
 	evalMinWithIndices    bool
 	evalModes             bool
+	Register              Register
 }
 
 // Register a way to store evaluated results.
