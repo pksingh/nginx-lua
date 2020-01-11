@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"os"
+)
+
 // XRecord facilitate to perform mathematical/statical operations.
 type XRecord struct {
 	data                  []float64
@@ -38,4 +43,11 @@ type Register struct {
 	MinValue          float64
 	ModeRepeatCount   int
 	Modes             []float64
+}
+
+
+func main() {
+	data := []string{"1, 2, 3, 4.5, 5.4, 6, 7"}
+	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", data)
+
 }
