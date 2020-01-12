@@ -47,7 +47,10 @@ type Register struct {
 
 
 func main() {
-	data := []string{"1, 2, 3, 4.5, 5.4, 6, 7"}
-	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", data)
+	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
+	xrec := XRecord{data: rdata}
+	fmt.Fprintf(os.Stdout, "Statistics: \nxrec : %v\n", xrec)
+
+
 
 }
