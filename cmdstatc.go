@@ -12,7 +12,7 @@ type XRecord struct {
 	length                int
 	even                  bool
 	middleIndex           int
-	err                   error
+	err                   error // any elaluation error will be strored here
 	evalTotal             bool
 	evalMean              bool
 	evalMedian            bool
@@ -25,7 +25,7 @@ type XRecord struct {
 	evalMin               bool
 	evalMinWithIndices    bool
 	evalModes             bool
-	Register              Register
+	Register              Register // for storing evaluated results
 }
 
 // Register a way to store evaluated results.
@@ -45,6 +45,10 @@ type Register struct {
 	Modes             []float64
 }
 
+// Length() gives XRecord data element size.
+func (x *XRecord) Length() int {
+	return x.length
+}
 
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
