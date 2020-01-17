@@ -50,6 +50,11 @@ func (x *XRecord) Length() int {
 	return x.length
 }
 
+// Even() gives true if the number of element in the XRecord is even.
+func (x *XRecord) Even() bool {
+	return x.even
+}
+
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
 	xrec := XRecord{data: rdata}
