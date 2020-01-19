@@ -55,11 +55,16 @@ func (x *XRecord) Even() bool {
 	return x.even
 }
 
+// validate() will true if no error
+func (x *XRecord) validate() bool {
+	if x.err != nil {
+		return false
+	}
+	return true
+}
+
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
 	xrec := XRecord{data: rdata}
 	fmt.Fprintf(os.Stdout, "Statistics: \nxrec : %v\n", xrec)
-
-
-
 }
