@@ -63,6 +63,19 @@ func (x *XRecord) validate() bool {
 	return true
 }
 
+// Total() gives the total value of values in XRecord.
+func (x *XRecord) Total() *XRecord {
+	if x.evalTotal || x.err != nil {
+		return x
+	}
+	x.Register.Total = 0
+	for _, v := range x.data {
+		x.Register.Total += v
+	}
+	x.evalTotal = true
+	return x
+}
+
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
 	xrec := XRecord{data: rdata}
