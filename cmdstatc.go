@@ -79,5 +79,7 @@ func (x *XRecord) Total() *XRecord {
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
 	xrec := XRecord{data: rdata}
+	xrec.Total()
 	fmt.Fprintf(os.Stdout, "Statistics: \nxrec : %v\n", xrec)
+	fmt.Fprintf(os.Stdout, "Total: %f\n", xrec.Register.Total)
 }
