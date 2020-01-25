@@ -76,6 +76,14 @@ func (x *XRecord) Total() *XRecord {
 	return x
 }
 
+// Print() gives a string with the contents of a XRecord
+func (x *XRecord) Print() string {
+	var sb strings.Builder
+	sb.WriteString(fmt.Sprintf("Data: %v", x.data))
+
+	return sb.String()
+}
+
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
 	xrec := XRecord{data: rdata}
