@@ -90,4 +90,6 @@ func main() {
 	xrec.Total()
 	fmt.Fprintf(os.Stdout, "Statistics: \nxrec : %v\n", xrec)
 	fmt.Fprintf(os.Stdout, "Total: %f\n", xrec.Register.Total)
+	fmt.Fprintln(os.Stdout)
+	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", xrec.Print())
 }
