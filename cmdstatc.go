@@ -80,6 +80,7 @@ func (x *XRecord) Total() *XRecord {
 func (x *XRecord) Print() string {
 	var sb strings.Builder
 	sb.WriteString(fmt.Sprintf("Data: %v", x.data))
+	sb.WriteString(fmt.Sprintf("\nTotal: %f", x.Register.Total))
 
 	return sb.String()
 }
