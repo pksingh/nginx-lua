@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 // XRecord facilitate to perform mathematical/statical operations.
@@ -74,6 +75,14 @@ func (x *XRecord) Total() *XRecord {
 	}
 	x.evalTotal = true
 	return x
+}
+
+// Failed() gives true if one or more calculations failed.
+func (x *XRecord) Failed() bool {
+	if x.err != nil {
+		return true
+	}
+	return false
 }
 
 // Print() gives a string with the contents of a XRecord
