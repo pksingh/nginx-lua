@@ -77,6 +77,22 @@ func (x *XRecord) Total() *XRecord {
 	return x
 }
 
+// Mean() gives the mean (average) value of values in XRecord.
+func (x *XRecord) Mean() *XRecord {
+	if x.evalMean || x.err != nil {
+		return x
+	}
+	if !x.evalTotal {
+		x.Total()
+		if x.err != nil {
+			return x
+		}
+	}
+	x.Register.Mean = x.Register.Total / float64(x.length)
+	x.evalMean = true
+	return x
+}
+
 // Failed() gives true if one or more calculations failed.
 func (x *XRecord) Failed() bool {
 	if x.err != nil {
