@@ -106,6 +106,7 @@ func (x *XRecord) Print() string {
 	var sb strings.Builder
 	sb.WriteString(fmt.Sprintf("Data: %v", x.data))
 	sb.WriteString(fmt.Sprintf("\nTotal: %f", x.Register.Total))
+	sb.WriteString(fmt.Sprintf("\nMean: %f", x.Register.Mean))
 
 	return sb.String()
 }
@@ -114,6 +115,7 @@ func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
 	xrec := XRecord{data: rdata}
 	xrec.Total()
+	xrec.Mean()
 	fmt.Fprintf(os.Stdout, "Statistics: \nxrec : %v\n", xrec)
 	fmt.Fprintf(os.Stdout, "Total: %f\n", xrec.Register.Total)
 	fmt.Fprintln(os.Stdout)
