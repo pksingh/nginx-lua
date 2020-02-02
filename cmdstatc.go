@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
+	"sort"
 	"strings"
 )
 
@@ -136,7 +138,7 @@ func (x *XRecord) Print() string {
 
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
-	xrec := XRecord{data: rdata}
+	xrec := New(rdata)
 	xrec.Total()
 	xrec.Mean()
 	fmt.Fprintf(os.Stdout, "Statistics: \nxrec : %v\n", xrec)
