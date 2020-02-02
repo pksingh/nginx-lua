@@ -93,6 +93,29 @@ func (x *XRecord) Mean() *XRecord {
 	return x
 }
 
+// New() gives an instance of XRecord from float64 array.
+// If not initialize successfully, then returns nil.
+func New(data []float64) *XRecord {
+	if len(data) == 0 {
+		return nil
+	}
+	x := &XRecord{
+		data:   data,
+		length: len(data),
+		even:   false,
+	}
+
+	x.sortedData = make([]float64, x.length)
+	copy(x.sortedData, x.data)
+	sort.Float64s(x.sortedData)
+	modInt, modFrac := math.Modf(float64(x.length))
+	if modFrac == 0.0 {
+		x.even = true
+	}
+	x.middleIndex = int(modInt / 2)
+	return x
+}
+
 // Failed() gives true if one or more calculations failed.
 func (x *XRecord) Failed() bool {
 	if x.err != nil {
