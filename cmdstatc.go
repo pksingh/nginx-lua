@@ -138,11 +138,10 @@ func (x *XRecord) Print() string {
 
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
-	xrec := New(rdata)
-	xrec.Total()
-	xrec.Mean()
-	fmt.Fprintf(os.Stdout, "Statistics: \nxrec : %v\n", xrec)
-	fmt.Fprintf(os.Stdout, "Total: %f\n", xrec.Register.Total)
+	calx := New(rdata)
+	calx.Total()
+	calx.Mean()
+	fmt.Fprintf(os.Stdout, "calx : %v\n", calx)
 	fmt.Fprintln(os.Stdout)
-	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", xrec.Print())
+	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
 }
