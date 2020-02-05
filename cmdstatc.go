@@ -95,6 +95,16 @@ func (x *XRecord) Mean() *XRecord {
 	return x
 }
 
+// Max() gives the biggest value in XRecord.
+func (x *XRecord) Max() *XRecord {
+	if x.evalMax || x.err != nil {
+		return x
+	}
+	x.Register.MaxValue = x.sortedData[x.length-1]
+	x.evalMax = true
+	return x
+}
+
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
