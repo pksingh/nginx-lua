@@ -105,6 +105,16 @@ func (x *XRecord) Max() *XRecord {
 	return x
 }
 
+// Min() gives the smallest value in XRecord.
+func (x *XRecord) Min() *XRecord {
+	if x.evalMin || x.err != nil {
+		return x
+	}
+	x.Register.MinValue = x.sortedData[0]
+	x.evalMax = true
+	return x
+}
+
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
