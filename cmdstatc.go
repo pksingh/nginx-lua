@@ -152,6 +152,8 @@ func (x *XRecord) Print() string {
 	sb.WriteString(fmt.Sprintf("Data: %v", x.data))
 	sb.WriteString(fmt.Sprintf("\nTotal: %f", x.Register.Total))
 	sb.WriteString(fmt.Sprintf("\nMean: %f", x.Register.Mean))
+	sb.WriteString(fmt.Sprintf("\nMax: %f", x.Register.MaxValue))
+	sb.WriteString(fmt.Sprintf("\nMin: %f", x.Register.MinValue))
 
 	return sb.String()
 }
@@ -161,6 +163,8 @@ func main() {
 	calx := New(rdata)
 	calx.Total()
 	calx.Mean()
+	calx.Max()
+	calx.Min()
 	fmt.Fprintf(os.Stdout, "calx : %v\n", calx)
 	fmt.Fprintln(os.Stdout)
 	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
