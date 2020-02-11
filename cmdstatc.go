@@ -105,6 +105,33 @@ func (x *XRecord) Max() *XRecord {
 	return x
 }
 
+// MaxWithIndices() evaluates the biggest value and associated indices in XRecord.
+func (x *XRecord) MaxWithIndices() *XRecord {
+	if x.evalMaxWithIndices || x.err != nil {
+		return x
+	}
+
+	if !x.evalMax {
+		x.Max()
+		if x.err != nil {
+			return x
+		}
+	}
+	x.Register.MaxIndices = []int{}
+	if x.length == 1 {
+		x.Register.MaxIndices = append(x.Register.MaxIndices, 0)
+		x.evalMaxWithIndices = true
+		return x
+	}
+	for i, v := range x.data {
+		if v == x.Register.MaxValue {
+			x.Register.MaxIndices = append(x.Register.MaxIndices, i)
+		}
+	}
+	x.evalMaxWithIndices = true
+	return x
+}
+
 // Min() gives the smallest value in XRecord.
 func (x *XRecord) Min() *XRecord {
 	if x.evalMin || x.err != nil {
