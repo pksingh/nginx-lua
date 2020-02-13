@@ -142,6 +142,33 @@ func (x *XRecord) Min() *XRecord {
 	return x
 }
 
+// MinWithIndices evaluates the smallest value and associated indices in XRecord.
+func (x *XRecord) MinWithIndices() *XRecord {
+	if x.evalMinWithIndices || x.err != nil {
+		return x
+	}
+
+	if !x.evalMin {
+		x.Min()
+		if x.err != nil {
+			return x
+		}
+	}
+	x.Register.MinIndices = []int{}
+	if x.length == 1 {
+		x.Register.MinIndices = append(x.Register.MinIndices, 0)
+		x.evalMinWithIndices = true
+		return x
+	}
+	for i, v := range x.data {
+		if v == x.Register.MinValue {
+			x.Register.MinIndices = append(x.Register.MinIndices, i)
+		}
+	}
+	x.evalMinWithIndices = true
+	return x
+}
+
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
