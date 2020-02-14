@@ -207,7 +207,9 @@ func (x *XRecord) Print() string {
 	sb.WriteString(fmt.Sprintf("\nTotal: %f", x.Register.Total))
 	sb.WriteString(fmt.Sprintf("\nMean: %f", x.Register.Mean))
 	sb.WriteString(fmt.Sprintf("\nMax: %f", x.Register.MaxValue))
+	sb.WriteString(fmt.Sprintf("\nMax Indices: %v", x.Register.MaxIndices))
 	sb.WriteString(fmt.Sprintf("\nMin: %f", x.Register.MinValue))
+	sb.WriteString(fmt.Sprintf("\nMin Indices: %v", x.Register.MinIndices))
 
 	return sb.String()
 }
