@@ -169,6 +169,31 @@ func (x *XRecord) MinWithIndices() *XRecord {
 	return x
 }
 
+// Range() evaluates range of the values in XRecord.
+func (x *XRecord) Range() *XRecord {
+	if x.evalRange || x.err != nil {
+		return x
+	}
+
+	if !x.evalMax {
+		x.Max()
+		if x.err != nil {
+			return x
+		}
+	}
+
+	if !x.evalMin {
+		x.Min()
+		if x.err != nil {
+			return x
+		}
+	}
+
+	x.Register.Range = x.Register.MaxValue - x.Register.MinValue
+	x.evalRange = true
+	return x
+}
+
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
