@@ -194,6 +194,33 @@ func (x *XRecord) Range() *XRecord {
 	return x
 }
 
+// Modes() evaluates the values appearing most often in XRecord.
+func (x *XRecord) Modes() *XRecord {
+	if x.evalModes || x.err != nil {
+		return x
+	}
+	occurences := make(map[float64]int)
+	x.Register.Modes = []float64{}
+	for _, i := range x.data {
+		occurences[i]++
+		if occurences[i] > x.Register.ModeRepeatCount {
+			x.Register.ModeRepeatCount = occurences[i]
+		}
+	}
+	if len(occurences) == x.length {
+		x.Register.ModeRepeatCount = 0
+		x.evalModes = true
+		return x
+	}
+	for i, v := range occurences {
+		if v == x.Register.ModeRepeatCount {
+			x.Register.Modes = append(x.Register.Modes, i)
+		}
+	}
+	x.evalModes = true
+	return x
+}
+
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
