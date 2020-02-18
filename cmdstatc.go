@@ -262,6 +262,8 @@ func (x *XRecord) Print() string {
 	sb.WriteString(fmt.Sprintf("\nMax Indices: %v", x.Register.MaxIndices))
 	sb.WriteString(fmt.Sprintf("\nMin: %f", x.Register.MinValue))
 	sb.WriteString(fmt.Sprintf("\nMin Indices: %v", x.Register.MinIndices))
+	sb.WriteString(fmt.Sprintf("\nModes: %v", x.Register.Modes))
+	sb.WriteString(fmt.Sprintf("\nMode Repeat Count: %d", x.Register.ModeRepeatCount))
 
 	return sb.String()
 }
