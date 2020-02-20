@@ -95,6 +95,26 @@ func (x *XRecord) Mean() *XRecord {
 	return x
 }
 
+// Variance() evaluates variance of the values in XRecord.
+func (x *XRecord) Variance() *XRecord {
+	if x.evalVariance || x.err != nil {
+		return x
+	}
+	if !x.evalMean {
+		x.Mean()
+		if x.err != nil {
+			return x
+		}
+	}
+	for _, i := range x.data {
+		r := x.Register.Mean - i
+		x.Register.Variance += r * r
+	}
+	x.Register.Variance /= float64(x.length)
+	x.evalVariance = true
+	return x
+}
+
 // Max() gives the biggest value in XRecord.
 func (x *XRecord) Max() *XRecord {
 	if x.evalMax || x.err != nil {
