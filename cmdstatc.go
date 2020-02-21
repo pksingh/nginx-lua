@@ -282,6 +282,7 @@ func (x *XRecord) Print() string {
 	sb.WriteString(fmt.Sprintf("\nMax Indices: %v", x.Register.MaxIndices))
 	sb.WriteString(fmt.Sprintf("\nMin: %f", x.Register.MinValue))
 	sb.WriteString(fmt.Sprintf("\nMin Indices: %v", x.Register.MinIndices))
+	sb.WriteString(fmt.Sprintf("\nVariance: %f", x.Register.Variance))
 	sb.WriteString(fmt.Sprintf("\nModes: %v", x.Register.Modes))
 	sb.WriteString(fmt.Sprintf("\nMode Repeat Count: %d", x.Register.ModeRepeatCount))
 
@@ -298,6 +299,8 @@ func main() {
 	calx.MaxWithIndices()
 	calx.MinWithIndices()
 	calx.Range()
+	calx.Modes()
+	calx.Variance()
 	fmt.Fprintf(os.Stdout, "calx : %v\n", calx)
 	fmt.Fprintln(os.Stdout)
 	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
