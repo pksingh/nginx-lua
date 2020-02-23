@@ -241,6 +241,36 @@ func (x *XRecord) Modes() *XRecord {
 	return x
 }
 
+// Median() evaluates median of the values in XRecord.
+func (x *XRecord) Median(sorted bool) *XRecord {
+	if (!sorted && x.evalMedian) || (sorted && x.evalSortedMedian) || x.err != nil {
+		return x
+	}
+	if x.length == 1 {
+		x.Register.SortedMedian = x.data[0]
+		x.Register.Median = x.data[0]
+		x.evalSortedMedian = true
+		x.evalMedian = true
+		return x
+	}
+
+	if sorted {
+		if !x.even {
+			x.Register.SortedMedian = x.sortedData[x.middleIndex]
+		} else {
+			x.Register.SortedMedian = (x.sortedData[x.middleIndex] + x.sortedData[x.middleIndex-1]) / 2
+		}
+		x.evalSortedMedian = true
+	} else {
+		if !x.even {
+			x.Register.Median = x.data[x.middleIndex]
+		} else {
+			x.Register.Median = (x.data[x.middleIndex] + x.data[x.middleIndex-1]) / 2
+		}
+		x.evalMedian = true
+	}
+	return x
+}
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
