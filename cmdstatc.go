@@ -271,6 +271,25 @@ func (x *XRecord) Median(sorted bool) *XRecord {
 	}
 	return x
 }
+
+// StandardDeviation() evaluates standard deviation of the values in XRecord.
+func (x *XRecord) StandardDeviation() *XRecord {
+	if x.evalStandardDeviation || x.err != nil {
+		return x
+	}
+
+	if !x.evalVariance {
+		x.Variance()
+		if x.err != nil {
+			return x
+		}
+	}
+
+	x.Register.StandardDeviation = math.Sqrt(x.Register.Variance)
+	x.evalStandardDeviation = true
+	return x
+}
+
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
