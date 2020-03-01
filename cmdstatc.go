@@ -290,6 +290,25 @@ func (x *XRecord) StandardDeviation() *XRecord {
 	return x
 }
 
+// RunAll() - single call for all available functions in XRecord.
+func (x *XRecord) RunAll() *XRecord {
+	if valid := x.validate(); !valid {
+		return x
+	}
+
+	x.Total()
+	x.StandardDeviation()
+	x.Variance()
+	x.Range()
+	x.MaxWithIndices()
+	x.MinWithIndices()
+	x.Median(true)
+	x.Median(false)
+	x.Mean()
+	x.Modes()
+	return x
+}
+
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
