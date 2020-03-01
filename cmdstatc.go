@@ -363,19 +363,8 @@ func (x *XRecord) Print() string {
 func main() {
 	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
 	calx := New(rdata)
-	calx.Total()
-	calx.Mean()
-	calx.Max()
-	calx.Min()
-	calx.MaxWithIndices()
-	calx.MinWithIndices()
-	calx.Range()
-	calx.Modes()
-	calx.Variance()
-	calx.Median(true)
-	calx.Median(false)
-	calx.StandardDeviation()
 	fmt.Fprintf(os.Stdout, "calx : %v\n", calx)
 	fmt.Fprintln(os.Stdout)
+	calx.RunAll()
 	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
 }
