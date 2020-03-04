@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"os"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -309,6 +311,23 @@ func (x *XRecord) RunAll() *XRecord {
 	return x
 }
 
+// NewString() gives an instance of XRecord from string array.
+func NewString(s string) *XRecord {
+	arr := []float64{}
+	for _, i := range strings.Split(s, ",") {
+		i := strings.TrimSpace(i)
+		if !strings.Contains(i, ".") {
+			i = i + ".0"
+		}
+		j, err := strconv.ParseFloat(i, 64)
+		if err != nil {
+			return nil
+		}
+		arr = append(arr, j)
+	}
+	return New(arr)
+}
+
 // New() gives an instance of XRecord from float64 array.
 // If not initialize successfully, then returns nil.
 func New(data []float64) *XRecord {
@@ -361,10 +380,16 @@ func (x *XRecord) Print() string {
 }
 
 func main() {
-	rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
-	calx := New(rdata)
+	// rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
+	// calx := New(rdata)
+	calx := NewString("1, 2, 3, 4.5, 5.4, 6, 7")
+
+	if calx == nil {
+		log.Fatal("failed to initialize calculator")
+	}
 	fmt.Fprintf(os.Stdout, "calx : %v\n", calx)
 	fmt.Fprintln(os.Stdout)
+
 	calx.RunAll()
 	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
 }
