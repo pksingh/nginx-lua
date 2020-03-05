@@ -311,6 +311,15 @@ func (x *XRecord) RunAll() *XRecord {
 	return x
 }
 
+// NewUint64() gives an instance of XRecord from uint64 array.
+func NewUint64(data []uint64) *XRecord {
+	arr := []float64{}
+	for _, i := range data {
+		arr = append(arr, float64(i))
+	}
+	return New(arr)
+}
+
 // NewString() gives an instance of XRecord from string array.
 func NewString(s string) *XRecord {
 	arr := []float64{}
