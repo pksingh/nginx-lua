@@ -347,6 +347,24 @@ func NewInt32(data []int32) *XRecord {
 	return New(arr)
 }
 
+// NewUint() gives an instance of XRecord from uint array.
+func NewUint(data []uint) *XRecord {
+	arr := []float64{}
+	for _, i := range data {
+		arr = append(arr, float64(i))
+	}
+	return New(arr)
+}
+
+// NewInt() gives an instance of XRecord from int array.
+func NewInt(data []int) *XRecord {
+	arr := []float64{}
+	for _, i := range data {
+		arr = append(arr, float64(i))
+	}
+	return New(arr)
+}
+
 // NewString() gives an instance of XRecord from string array.
 func NewString(s string) *XRecord {
 	arr := []float64{}
