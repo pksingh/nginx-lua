@@ -446,4 +446,19 @@ func main() {
 
 	calx.RunAll()
 	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
+
+	arr1 := []uint64{1, 2, 3, 4, 5, 6, 7}
+	calx = NewUint64(arr1)
+
+	arr2 := []int64{1, 2, 3, 4, 5, 6, 7}
+	calx = NewInt64(arr2)
+
+	arr3 := []int{1, 2, 3, 4, 5, 6, 7}
+	calx = NewInt(arr3)
+
+	arr4 := []float64{1, 2, 3, 4, 5, 6, 7}
+	calx = New(arr4)
+
+	calx.RunAll()
+	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
 }
