@@ -8,6 +8,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 // XRecord facilitate to perform mathematical/statical operations.
@@ -413,21 +414,42 @@ func (x *XRecord) Failed() bool {
 	return false
 }
 
+// addNLines() : Add NewLines at appropriate places
+func addNLines(s string, max int) string {
+	if len(s) > max {
+		var sb strings.Builder
+		var j int
+		for _, c := range s {
+			if unicode.IsSpace(c) {
+				if j > max {
+					sb.WriteString("\n  ")
+					j = 2
+				}
+			}
+			sb.WriteRune(c)
+			j++
+		}
+		return sb.String()
+	}
+	return s
+}
+
 // Print() gives a string with the contents of a XRecord
 func (x *XRecord) Print() string {
+	maxWidth := 40
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("Data: %v", x.data))
+	sb.WriteString(addNLines(fmt.Sprintf("Data: %v", x.data), maxWidth))
 	sb.WriteString(fmt.Sprintf("\nTotal: %f", x.Register.Total))
 	sb.WriteString(fmt.Sprintf("\nMean: %f", x.Register.Mean))
 	sb.WriteString(fmt.Sprintf("\nMedian: %f", x.Register.Median))
 	sb.WriteString(fmt.Sprintf("\nSorted Median: %f", x.Register.SortedMedian))
 	sb.WriteString(fmt.Sprintf("\nMax: %f", x.Register.MaxValue))
-	sb.WriteString(fmt.Sprintf("\nMax Indices: %v", x.Register.MaxIndices))
+	sb.WriteString(addNLines(fmt.Sprintf("\nMax Indices: %v", x.Register.MaxIndices), maxWidth))
 	sb.WriteString(fmt.Sprintf("\nMin: %f", x.Register.MinValue))
-	sb.WriteString(fmt.Sprintf("\nMin Indices: %v", x.Register.MinIndices))
+	sb.WriteString(addNLines(fmt.Sprintf("\nMin Indices: %v", x.Register.MinIndices), maxWidth))
 	sb.WriteString(fmt.Sprintf("\nVariance: %f", x.Register.Variance))
 	sb.WriteString(fmt.Sprintf("\nStandard Deviation: %f", x.Register.StandardDeviation))
-	sb.WriteString(fmt.Sprintf("\nModes: %v", x.Register.Modes))
+	sb.WriteString(addNLines(fmt.Sprintf("\nModes: %v", x.Register.Modes), maxWidth))
 	sb.WriteString(fmt.Sprintf("\nMode Repeat Count: %d", x.Register.ModeRepeatCount))
 
 	return sb.String()
