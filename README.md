@@ -39,3 +39,25 @@ error: operator not from ( + - * / )
 calc>calc>^C
 
 ```
+
+---
+# Commandline Statical Calculator
+
+A Statical calculator.
+
+## Features
+
+- It supports basic statistics : like [ Total, Min, Max, Avg ]
+- Also supports extended statistics: like [ Mean, Median, Mode, StandardDeviation, Variance ]
+
+## Building
+
+ We need to fire `go build cmdstatc.go` from the console inside the parent folder.
+ This will generate `cmdstatc.exe` or `cmdstatc` binary files based on the platform you are using.
+
+## Running
+
+This will be pretty straight forward. We need to call the binary file generated in the build stage.
+In our case; `cmdstatc.exe` and we can play with few inputs and check.
+
+---
