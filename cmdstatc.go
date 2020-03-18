@@ -455,6 +455,17 @@ func (x *XRecord) Print() string {
 	return sb.String()
 }
 
+// processStat() : processes the string expression
+func processStat(e string) (*XRecord, error) {
+	fmt.Fprintf(os.Stdout, "inp : %v\n", e)
+	calx := NewString(e)
+
+	calx.RunAll()
+	fmt.Fprintf(os.Stdout, ":: Statistics :: \n%s\n", calx.Print())
+
+	return calx, calx.err
+}
+
 func main() {
 	// rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
 	// calx := New(rdata)
