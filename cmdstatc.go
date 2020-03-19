@@ -1,8 +1,8 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"log"
 	"math"
 	"os"
 	"sort"
@@ -467,31 +467,18 @@ func processStat(e string) (*XRecord, error) {
 }
 
 func main() {
-	// rdata := []float64{1, 2, 3, 4.5, 5.4, 6, 7}
-	// calx := New(rdata)
-	calx := NewString("1, 2, 3, 4.5, 5.4, 6, 7")
-
-	if calx == nil {
-		log.Fatal("failed to initialize calculator")
+	for {
+		scanner := bufio.NewScanner(os.Stdin)
+		fmt.Print("statc>")
+		for scanner.Scan() {
+			fmt.Println("exp:", scanner.Text())
+			res, err := processStat(scanner.Text())
+			if err != nil {
+				fmt.Println(err)
+			} else {
+				fmt.Println(res)
+			}
+			fmt.Print("statc>")
+		}
 	}
-	fmt.Fprintf(os.Stdout, "calx : %v\n", calx)
-	fmt.Fprintln(os.Stdout)
-
-	calx.RunAll()
-	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
-
-	arr1 := []uint64{1, 2, 3, 4, 5, 6, 7}
-	calx = NewUint64(arr1)
-
-	arr2 := []int64{1, 2, 3, 4, 5, 6, 7}
-	calx = NewInt64(arr2)
-
-	arr3 := []int{1, 2, 3, 4, 5, 6, 7}
-	calx = NewInt(arr3)
-
-	arr4 := []float64{1, 2, 3, 4, 5, 6, 7}
-	calx = New(arr4)
-
-	calx.RunAll()
-	fmt.Fprintf(os.Stdout, "Statistics: \n%s\n", calx.Print())
 }
