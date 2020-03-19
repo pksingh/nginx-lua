@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"math"
 	"os"
@@ -458,8 +459,12 @@ func (x *XRecord) Print() string {
 // processStat() : processes the string expression
 func processStat(e string) (*XRecord, error) {
 	fmt.Fprintf(os.Stdout, "inp : %v\n", e)
-	calx := NewString(e)
-
+	c := strings.ReplaceAll(e, " ", ",")
+	calx := NewString(c)
+	if calx == nil {
+		err := errors.New("failed to initialize stat-calculator")
+		return nil, err
+	}
 	calx.RunAll()
 	fmt.Fprintf(os.Stdout, ":: Statistics :: \n%s\n", calx.Print())
 
@@ -476,7 +481,7 @@ func main() {
 			if err != nil {
 				fmt.Println(err)
 			} else {
-				fmt.Println(res)
+				fmt.Println(":: Statistics ::\n", res.Print())
 			}
 			fmt.Print("statc>")
 		}
