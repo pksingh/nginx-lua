@@ -458,9 +458,7 @@ func (x *XRecord) Print() string {
 
 // processStat() : processes the string expression
 func processStat(e string) (*XRecord, error) {
-	fmt.Fprintf(os.Stdout, "inp : %v\n", e)
 	c := strings.ReplaceAll(strings.Join(strings.Fields(e), ","), ",,", ",")
-	fmt.Fprintf(os.Stdout, "inp : %v\n", c)
 	calx := NewString(c)
 	if calx == nil {
 		err := errors.New("failed to initialize stat-calculator")
@@ -477,7 +475,6 @@ func main() {
 		scanner := bufio.NewScanner(os.Stdin)
 		fmt.Print("statc>")
 		for scanner.Scan() {
-			fmt.Println("exp:", scanner.Text())
 			res, err := processStat(scanner.Text())
 			if err != nil {
 				fmt.Println(err)
