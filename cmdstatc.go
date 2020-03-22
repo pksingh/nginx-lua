@@ -465,7 +465,6 @@ func processStat(e string) (*XRecord, error) {
 		return nil, err
 	}
 	calx.RunAll()
-	fmt.Fprintf(os.Stdout, ":: Statistics :: \n%s\n", calx.Print())
 
 	return calx, calx.err
 }
@@ -479,7 +478,7 @@ func main() {
 			if err != nil {
 				fmt.Println(err)
 			} else {
-				fmt.Println(":: Statistics ::\n", res.Print())
+				fmt.Printf(":: Statistics ::\n%s\n", res.Print())
 			}
 			fmt.Print("statc>")
 		}
