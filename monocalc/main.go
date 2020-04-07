@@ -17,6 +17,11 @@ func main() {
 		rw.Write([]byte(`{"data":"ok"}`))
 	})
 
+	http.HandleFunc("/calculate", func(rw http.ResponseWriter, req *http.Request) {
+		rw.WriteHeader(http.StatusOK)
+		rw.Write([]byte(`{"data":"called /calculate"}`))
+	})
+
 	log.Println("Server Starting on 8080")
 	log.Fatal(http.ListenAndServe(":8080", http.DefaultServeMux))
 
