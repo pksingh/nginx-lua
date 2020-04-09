@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -25,4 +26,9 @@ func main() {
 	log.Println("Server Starting on 8080")
 	log.Fatal(http.ListenAndServe(":8080", http.DefaultServeMux))
 
+}
+
+// Will use for api path and version
+func prefix(route string) string {
+	return fmt.Sprintf("%s%s", AppBasepath, route)
 }
