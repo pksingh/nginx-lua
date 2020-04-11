@@ -13,12 +13,12 @@ const (
 )
 
 func main() {
-	http.HandleFunc("/status", func(rw http.ResponseWriter, req *http.Request) {
+	handle("/status", http.MethodGet, func(rw http.ResponseWriter, req *http.Request) {
 		rw.WriteHeader(http.StatusOK)
 		rw.Write([]byte(`{"data":"ok"}`))
 	})
 
-	http.HandleFunc("/calculate", func(rw http.ResponseWriter, req *http.Request) {
+	handle("/calculate", http.MethodPost, func(rw http.ResponseWriter, req *http.Request) {
 		rw.WriteHeader(http.StatusOK)
 		rw.Write([]byte(`{"data":"called /calculate"}`))
 	})
