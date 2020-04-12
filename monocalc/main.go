@@ -33,13 +33,14 @@ func prefix(route string) string {
 	return fmt.Sprintf("%s%s", AppBasepath, route)
 }
 
-// handle() will add required prefix
+// handle() will add required prefix and inject header if missed.
 func handle(route string, method string, handler func(http.ResponseWriter, *http.Request)) {
 	http.HandleFunc(prefix(route), func(rw http.ResponseWriter, req *http.Request) {
 		if req.Method != method {
 			rw.WriteHeader(http.StatusNotFound)
 			return
 		}
+		rw.Header().Set("Content-Type", "application/json")
 		handler(rw, req)
 	})
 }
