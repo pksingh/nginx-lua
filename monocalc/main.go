@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,6 +13,13 @@ const (
 	AppService  = "name: monocalc, version: " + AppVersion
 )
 
+type XInt int
+
+// Struct for input
+type InputRequest struct {
+	Input string `json:"input" binding:"required"`
+}
+
 func main() {
 	handle("/status", http.MethodGet, func(rw http.ResponseWriter, req *http.Request) {
 		rw.WriteHeader(http.StatusOK)
@@ -19,8 +27,12 @@ func main() {
 	})
 
 	handle("/calculate", http.MethodPost, func(rw http.ResponseWriter, req *http.Request) {
+		var body InputRequest
+
+		_ = json.NewDecoder(req.Body).Decode(&body)
+		fmt.Println("Received on /calculate:", body.Input)
 		rw.WriteHeader(http.StatusOK)
-		rw.Write([]byte(`{"data":"called /calculate"}`))
+		rw.Write([]byte(`{"data":"called /calculate ` + body.Input + `" }`))
 	})
 
 	log.Println("Server Starting on 8080")
