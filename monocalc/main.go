@@ -29,7 +29,11 @@ func main() {
 	handle("/calculate", http.MethodPost, func(rw http.ResponseWriter, req *http.Request) {
 		var body InputRequest
 
-		_ = json.NewDecoder(req.Body).Decode(&body)
+		if err := json.NewDecoder(req.Body).Decode(&body); err != nil {
+			rw.WriteHeader(http.StatusBadRequest)
+			rw.Write([]byte(fmt.Sprintf(`{"error":"Invalid Input","service":"%s"}`, AppService)))
+			return
+		}
 		fmt.Println("Received on /calculate:", body.Input)
 		rw.WriteHeader(http.StatusOK)
 		rw.Write([]byte(`{"data":"called /calculate ` + body.Input + `" }`))
