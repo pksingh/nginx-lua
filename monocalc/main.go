@@ -35,8 +35,19 @@ func main() {
 			return
 		}
 		fmt.Println("Received on /calculate:", body.Input)
-		rw.WriteHeader(http.StatusOK)
-		rw.Write([]byte(`{"data":"called /calculate ` + body.Input + `" }`))
+		result := "WIP"
+		
+		ret := map[string]interface{}{
+			"operands": "[" + body.Input + "]",
+			"origins":  body.Input,
+			"result":   result,
+			"service":  AppService,
+		}
+		fmt.Println("Returened on /calculate:", ret)
+
+		if err := json.NewEncoder(rw).Encode(ret); err != nil {
+			rw.WriteHeader(http.StatusInternalServerError)
+		}
 	})
 
 	log.Println("Server Starting on 8080")
