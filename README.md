@@ -107,3 +107,99 @@ C:\Users\Home\Desktop\uservices>
 ```
 
 ---
+# Calculator Web Service /MONOlithic/
+
+```
+C:\Users\Home\Desktop\uservices\monocalc>go build .
+
+C:\Users\Home\Desktop\uservices\monocalc>monocalc.exe
+2020/04/04 11:14:35 Server Starting on 8080
+^C
+```
+
+```
+C:\Users\Home\Desktop\uservices\monocalc>curl http://localhost:8080/status
+{"data":"ok"}
+C:\Users\Home\Desktop\uservices\monocalc>curl http://localhost:8080/calculate
+{"data":"called /calculate"}
+```
+
+---
+
+```
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/calculate
+404 page not found
+
+C:\Users\Home\Desktop\uservices\monocalc>curl http://localhost:8080/api/v1/calculate
+
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate
+{"data":"called /calculate"}
+C:\Users\Home\Desktop\uservices\monocalc>
+```
+
+---
+
+C:\Users\Home\Desktop\uservices\monocalc>monocalc.exe
+2020/04/12 10:04:01 Server Starting on 8080
+Received on /calculate:
+Received on /calculate: data
+Received on /calculate: input-data
+Received on /calculate:
+
+```
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "-"
+{"data":"called /calculate "}
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"input\": \"data\" }"
+{"data":"called /calculate data"}
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"input\": \"input-data\" }" 
+{"data":"called /calculate input-data"}
+C:\Users\Home\Desktop\uservices\monocalc>
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"wrong\": \"input-data\" }" 
+{"data":"called /calculate "}
+C:\Users\Home\Desktop\uservices\monocalc>
+```
+
+---
+```
+C:\Users\Home\Desktop\uservices\monocalc>monocalc.exe
+2020/04/19 11:11:53 Server Starting on 8080
+Received on /calculate: input-data
+Returened on /calculate: map[operands:[input-data] origins:input-data result:WIP service:name: monocalc, version: v1]
+```
+
+```
+C:\Users\Home\Desktop\uservices\monocalc>
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"wrong\": \"input-data\" }"
+{"data":"called /calculate " }
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "-"
+{"error":"Invalid Input","service":"name: monocalc, version: v1"}
+C:\Users\Home\Desktop\uservices\monocalc>
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"input\": \"input-data\" }"
+{"operands":"[input-data]","origins":"input-data","result":"WIP","service":"name: monocalc, version: v1"}
+```
+---
+```
+C:\Users\Home\Desktop\uservices\monocalc>monocalc.exe
+2020/04/19 11:17:08 Server Starting on 8080
+Received on /calculate: input-data
+2020/04/19 11:17:13 char i not allowed
+
+C:\Users\Home\Desktop\uservices\monocalc>monocalc.exe
+2020/04/19 11:19:11 Server Starting on 8080
+Received on /calculate: 1 2 3
+tokens:  [{1 1} {1 2} {1 3}]
+Returened on /calculate: map[operands:[1 2 3] origins:1 2 3 result:3 service:name: monocalc, version: v1]
+^C
+```
+---
+```
+C:\Users\Home\Desktop\uservices\monocalc>
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"input\": \"input-data\" }"
+curl: (56) Recv failure: Connection was reset
+
+C:\Users\Home\Desktop\uservices\monocalc>
+C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"input\": \"1 2 3\" }"
+{"operands":"[1 2 3]","origins":"1 2 3","result":3,"service":"name: monocalc, version: v1"}
+
+C:\Users\Home\Desktop\uservices\monocalc>
+```
