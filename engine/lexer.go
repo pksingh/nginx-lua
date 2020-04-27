@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"regexp"
 	"unicode"
 )
 
@@ -26,4 +27,10 @@ func isWhitespace(r rune) bool {
 
 func isNumber(r rune) bool {
 	return unicode.IsDigit(r)
+}
+
+// OPR symbols: - + - * / ( ) ^ % !
+func isOperator(r string) bool {
+	var validOp = regexp.MustCompile(`\(|\)|\-|\+|\/|\*|\^|\%`)
+	return validOp.MatchString(r)
 }
