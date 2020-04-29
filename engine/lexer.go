@@ -22,6 +22,16 @@ type Token struct {
 }
 
 
+func readWhile(runes []rune, predicate isFunc) (string, []rune) {
+	var s = ""
+	for len(runes) > 0 && predicate(runes[0]) {
+		c, shifted := shiftRune(runes)
+		runes = shifted
+		s += string(c)
+	}
+	return s, runes
+}
+
 func shiftRune(runes []rune) (rune, []rune) {
 	var r rune
 	if len(runes) > 0 {
