@@ -21,6 +21,16 @@ type Token struct {
 	Value string
 }
 
+
+func shiftRune(runes []rune) (rune, []rune) {
+	var r rune
+	if len(runes) > 0 {
+		r = runes[0]
+		runes = runes[1:]
+	}
+	return r, runes
+}
+
 func isWhitespace(r rune) bool {
 	return unicode.IsSpace(r)
 }
