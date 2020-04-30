@@ -1,6 +1,8 @@
 package engine
 
 import (
+	"fmt"
+	"log"
 	"regexp"
 	"unicode"
 )
@@ -21,6 +23,43 @@ type Token struct {
 	Value string
 }
 
+// Tokenize performs a lexical analysis
+func Tokenize(s string) []Token {
+	runes := []rune(s)
+	tokens := []Token{}
+
+	for len(runes) > 0 {
+		// Skip white space
+		_, runes = readWhile(runes, isWhitespace)
+
+		if len(runes) == 0 {
+			break
+		}
+
+		r, shifted := shiftRune(runes)
+		runes = shifted
+
+		if isNumber(r) {
+			s, readed := readWhile(runes, isNumber)
+			runes = readed
+			token := Token{
+				Type:  NUM,
+				Value: string(r) + s,
+			}
+			tokens = append(tokens, token)
+		} else if isOperator(string(r)) {
+			token := Token{
+				Type:  OPR,
+				Value: string(r),
+			}
+			tokens = append(tokens, token)
+		} else {
+			log.Fatalf("char %s not allowed", string(r))
+		}
+	}
+	fmt.Println("tokens: ", tokens)
+	return tokens
+}
 
 func readWhile(runes []rune, predicate isFunc) (string, []rune) {
 	var s = ""
