@@ -10,3 +10,14 @@ var PrecedenceOperators = map[string]int{
 	"^": 40,
 	"%": 50,
 }
+
+// ShiftToken shift token array
+func ShiftToken(tokens []Token) (Token, []Token) {
+	var t Token
+	if len(tokens) > 0 {
+		t = tokens[0]
+		tokens = tokens[1:]
+	}
+	return t, tokens
+}
+
