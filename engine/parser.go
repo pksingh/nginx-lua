@@ -21,3 +21,12 @@ func ShiftToken(tokens []Token) (Token, []Token) {
 	return t, tokens
 }
 
+// PopToken will remove the token from top(high index) array
+func popToken(tokens []Token) (Token, []Token) {
+	var t Token
+	if len(tokens) > 0 {
+		t = tokens[len(tokens)-1]
+		tokens = tokens[:len(tokens)-1]
+	}
+	return t, tokens
+}
