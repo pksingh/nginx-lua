@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"engine" // will refer to github.com/pksingh/uservices/engine
 )
 
 const (
@@ -35,8 +37,12 @@ func main() {
 			return
 		}
 		fmt.Println("Received on /calculate:", body.Input)
-		result := "WIP"
-		
+
+		infix := engine.Tokenize(body.Input)
+		tokens := engine.PostFixExpression(infix)
+		result := engine.Calculate(tokens)
+		// result := "WIP"
+
 		ret := map[string]interface{}{
 			"operands": "[" + body.Input + "]",
 			"origins":  body.Input,

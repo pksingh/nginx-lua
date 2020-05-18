@@ -203,3 +203,28 @@ C:\Users\Home\Desktop\uservices\monocalc>curl -X POST http://localhost:8080/api/
 
 C:\Users\Home\Desktop\uservices\monocalc>
 ```
+
+---
+
+```
+C:\Users\Home\Desktop\uservices\monocalc>monocalc.exe
+2020/05/16 18:12:47 Server Starting on 8080
+Received on /calculate: 1+2-3
+tokens:  [{1 1} {0 +} {1 2} {0 -} {1 3}]
+Evaluate: 1 + 2 = 3
+Evaluate: 3 - 3 = 0
+Returened on /calculate: map[operands:[1+2-3] origins:1+2-3 result:0 service:name: monocalc, version: v1]    
+Received on /calculate: 1 2 # 3
+2020/05/16 18:14:38 char # not allowed
+
+C:\Users\Home\Desktop\uservices\monocalc>
+```
+
+```
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"input\": \"1+2-3\" }"
+{"operands":"[1+2-3]","origins":"1+2-3","result":0,"service":"name: monocalc, version: v1"}
+
+C:\Users\Home\Desktop\uservices>curl -X POST http://localhost:8080/api/v1/calculate -d "{ \"input\": \"1 2 # 3\" }"
+curl: (56) Recv failure: Connection was reset
+C:\Users\Home\Desktop\uservices>
+```
