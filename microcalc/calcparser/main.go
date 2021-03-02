@@ -12,7 +12,7 @@ import (
 const (
 	AppVersion  = "v1"
 	AppBasepath = "/api/" + AppVersion
-	AppService  = "name: monocalc, version: " + AppVersion
+	AppService  = "name: calcparser, version: " + AppVersion
 )
 
 type XInt int
@@ -28,7 +28,7 @@ func main() {
 		rw.Write([]byte(`{"data":"ok"}`))
 	})
 
-	handle("/calculate", http.MethodPost, func(rw http.ResponseWriter, req *http.Request) {
+	handle("/evaluate", http.MethodPost, func(rw http.ResponseWriter, req *http.Request) {
 		var body InputRequest
 
 		if err := json.NewDecoder(req.Body).Decode(&body); err != nil {
@@ -36,7 +36,7 @@ func main() {
 			rw.Write([]byte(fmt.Sprintf(`{"error":"Invalid Input","service":"%s"}`, AppService)))
 			return
 		}
-		fmt.Println("Received on /calculate:", body.Input)
+		fmt.Println("Received on /evaluate:", body.Input)
 
 		infix := engine.Tokenize(body.Input)
 		tokens := engine.PostFixExpression(infix)
@@ -49,14 +49,14 @@ func main() {
 			"result":   result,
 			"service":  AppService,
 		}
-		fmt.Println("Returened on /calculate:", ret)
+		fmt.Println("Returened on /evaluate:", ret)
 
 		if err := json.NewEncoder(rw).Encode(ret); err != nil {
 			rw.WriteHeader(http.StatusInternalServerError)
 		}
 	})
 
-	log.Println("Server Starting on 8080")
+	log.Printf("Server %s Starting on 8080\n", AppService)
 	log.Fatal(http.ListenAndServe(":8080", http.DefaultServeMux))
 
 }
