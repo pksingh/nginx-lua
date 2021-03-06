@@ -22,6 +22,19 @@ type ResultResponse struct {
 	Result  int    `json:"result" binding:"required"`
 	Service string `json:"service" binding:"required"`
 }
+
+// NodeResponse received from each of micro services
+type NodeResponse struct {
+	Operands [2]int `json:"operands" binding:"required"`
+	Result   int    `json:"result" binding:"required"`
+	Service  string `json:"service" binding:"required"`
+}
+
+type Node struct {
+	host string
+	port string
+	uri  string
+}
 func GetEnvOrDefault(name string, def string) string {
 	name, ok := os.LookupEnv(name)
 	if !ok {
