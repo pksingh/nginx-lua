@@ -1,5 +1,9 @@
 package main
 
+import (
+	"os"
+)
+
 var (
 	ADD_HOST = GetEnvOrDefault("ADD_HOST", "localhost")
 	ADD_PORT = GetEnvOrDefault("ADD_PORT", "8081")
@@ -35,6 +39,17 @@ type Node struct {
 	port string
 	uri  string
 }
+
+var NodeEndpoint = map[string]string{
+	"+": "http://" + ADD_HOST + ":" + ADD_PORT + ADD_URI,
+	"-": "http://" + SUB_HOST + ":" + SUB_PORT + SUB_URI,
+}
+
+var Nodes = map[string]Node{
+	"+": {ADD_HOST, ADD_PORT, ADD_URI},
+	"-": {SUB_HOST, SUB_PORT, SUB_URI},
+}
+
 func GetEnvOrDefault(name string, def string) string {
 	name, ok := os.LookupEnv(name)
 	if !ok {
