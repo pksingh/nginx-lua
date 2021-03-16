@@ -31,8 +31,14 @@ func Evaluate(tokens []Token) ResultResponse {
 
 			r, rPoped := popInt(stack)
 			stack = rPoped
+
+			res, err := DoPost(t.Value, r, l)
+			if err != nil {
+				log.Panicln("Error: ", err.Error())
+			}
 			nr := NodeResponse{}
-			fmt.Println("res : ", nr)
+			fmt.Println("res : ", res)
+			fmt.Println("nr res : ", nr)
 			calc := nr.Result
 			result.Origins = append(result.Origins, nr)
 			stack = append(stack, calc)
