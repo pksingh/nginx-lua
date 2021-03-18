@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"strconv"
@@ -37,6 +38,9 @@ func Evaluate(tokens []Token) ResultResponse {
 				log.Panicln("Error: ", err.Error())
 			}
 			nr := NodeResponse{}
+			if err := json.NewDecoder(res.Body).Decode(&nr); err != nil {
+				fmt.Println("error : ", err.Error())
+			}
 			fmt.Println("res : ", res)
 			fmt.Println("nr res : ", nr)
 			calc := nr.Result
