@@ -6,7 +6,7 @@ const APP_SERVICE = `name: mul, version: ${APP_VERSION}`;
 const APP_PORT = process.env.APP_PORT || 8083;
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send(`welcome all - ${APP_SERVICE}`);
 });
 
 app.listen(APP_PORT, () => {
