@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+const debug = require('debug')('app');
 const router = express.Router()
 const APP_VERSION = 'v1';
 const APP_BASEPATH = `/api/${APP_VERSION}`;
@@ -13,6 +15,7 @@ app.get('/', (req, res) => {
 router
     .get('/status', (_, res) => res.status(200).json({ data: 'ok' }))
 
+app.use(morgan('combined'))
 app.use(APP_BASEPATH, router);
 
 app.listen(APP_PORT, () => {
