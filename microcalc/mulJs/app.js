@@ -17,6 +17,9 @@ router
 
 app.use(morgan('combined'))
 app.use(APP_BASEPATH, router);
+app.use((_, res) => {
+    res.status(404).end();
+});
 
 app.listen(APP_PORT, () => {
   console.log(`service ${APP_SERVICE} launched at  ${APP_PORT}`);
