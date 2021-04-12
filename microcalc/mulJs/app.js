@@ -14,6 +14,9 @@ app.get('/', (req, res) => {
 
 router
     .get('/status', (_, res) => res.status(200).json({ data: 'ok' }))
+    .post('/mul', (req, res) => {
+        console.log("req.body = ",req.body)
+    });
 
 app.use(morgan('combined'))
 app.use(APP_BASEPATH, router);
