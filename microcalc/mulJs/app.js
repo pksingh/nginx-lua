@@ -16,6 +16,13 @@ router
     .get('/status', (_, res) => res.status(200).json({ data: 'ok' }))
     .post('/mul', (req, res) => {
         console.log("req.body = ",req.body)
+        if (!req.body
+            || !req.body.operands
+            || !Array.isArray(req.body.operands)
+            || req.body.operands.length !== 2) {
+            return res.status(400).json({ error: 'Invalid input', service: APP_SERVICE });
+        }
+
     });
 
 app.use(morgan('combined'))
