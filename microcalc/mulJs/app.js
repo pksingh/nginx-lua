@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const debug = require('debug')('app');
 const router = express.Router()
+const bodyParser = require('body-parser');
 const APP_VERSION = 'v1';
 const APP_BASEPATH = `/api/${APP_VERSION}`;
 const APP_SERVICE = `name: mul, version: ${APP_VERSION}`;
@@ -26,6 +27,7 @@ router
     });
 
 app.use(morgan('combined'))
+app.use(bodyParser.json());
 app.use(APP_BASEPATH, router);
 app.use((_, res) => {
     res.status(404).end();
