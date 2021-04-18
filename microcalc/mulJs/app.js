@@ -24,6 +24,9 @@ router
             return res.status(400).json({ error: 'Invalid input', service: APP_SERVICE });
         }
 
+        let [op1, op2] = req.body.operands;
+        debug('Received', op1, op2);
+
     });
 
 app.use(morgan('combined'))
