@@ -27,6 +27,8 @@ router
         let [op1, op2] = req.body.operands;
         debug('Received', op1, op2);
 
+        return res.status(200).json({
+        });
     });
 
 app.use(morgan('combined'))
