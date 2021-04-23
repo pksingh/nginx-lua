@@ -27,7 +27,13 @@ router
         let [op1, op2] = req.body.operands;
         debug('Received', op1, op2);
 
+        op1 = parseInt(op1);
+        op2 = parseInt(op2);
+
         return res.status(200).json({
+            result: op1 * op2,
+            operands: [op1, op2],
+            service: APP_SERVICE
         });
     });
 
