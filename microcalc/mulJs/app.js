@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const debug = require('debug')('app');
 const router = express.Router()
 const bodyParser = require('body-parser');
+
 const APP_VERSION = 'v1';
 const APP_BASEPATH = `/api/${APP_VERSION}`;
 const APP_SERVICE = `name: mul, version: ${APP_VERSION}`;
@@ -44,6 +45,7 @@ app.use((_, res) => {
     res.status(404).end();
 });
 
+// app.listen(APP_PORT, () => debug(`service launched at ${APP_PORT}`));
 app.listen(APP_PORT, () => {
   console.log(`service ${APP_SERVICE} launched at  ${APP_PORT}`);
 });
