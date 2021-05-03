@@ -1,6 +1,8 @@
-const Koa = require('koa');
+const Koa = require("koa");             // import koa
+const logger = require("koa-logger");   // import koa logger
 const app = new Koa();
 
+app.use(logger());                      //Enable logger
 app.use(async ctx => {
   ctx.body = 'Hello World';
 });
