@@ -11,9 +11,21 @@ const APP_PORT = process.env.APP_PORT || 8084;
 const app = new Koa();
 app.use(logger());                      //Enable logger
 
-app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
+
+// create a router for building routes
+const router = koaRouter();
+
+// Index Route
+// context is a combo of the node request/response objects
+router
+//     .prefix(APP_BASEPATH)
+    .get("/status", async (ctx) => {
+        // The response is the value of the context body
+        ctx.body = "{data: 'ok'}";
+    })
+
+// Register routes
+app.use(router.routes());
 
 // Turn on the server
 app.listen(APP_PORT, () => {
