@@ -1,5 +1,6 @@
 const Koa = require("koa");             // import koa
 const logger = require("koa-logger");   // import koa logger
+const koaRouter = require("koa-router"); // import koa router
 
 // define the APP constants
 const APP_VERSION = 'v1';
@@ -18,11 +19,15 @@ const router = koaRouter();
 // Index Route
 // context is a combo of the node request/response objects
 router
-//     .prefix(APP_BASEPATH)
+    .prefix(APP_BASEPATH)
     .get("/status", async (ctx) => {
         // The response is the value of the context body
         ctx.body = "{data: 'ok'}";
     })
+    .post('/div', async (ctx) => {
+        console.log("request.body = ",ctx.request.body);
+
+    });
 
 // Register routes
 app.use(router.routes());
