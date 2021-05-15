@@ -1,6 +1,7 @@
 const Koa = require("koa");             // import koa
 const logger = require("koa-logger");   // import koa logger
 const koaRouter = require("koa-router"); // import koa router
+const koaBody = require('koa-body');    // import koa body parser
 
 // define the APP constants
 const APP_VERSION = 'v1';
@@ -30,6 +31,7 @@ router
     });
 
 // Register routes
+app.use(koaBody());
 app.use(router.routes());
 
 // Turn on the server
