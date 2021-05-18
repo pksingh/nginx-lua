@@ -28,6 +28,13 @@ router
     .post('/div', async (ctx) => {
         console.log("request.body = ",ctx.request.body);
 
+        if (!ctx.request.body
+            || !ctx.request.body.operands
+            || !Array.isArray(ctx.request.body.operands)
+            || ctx.request.body.operands.length !== 2) {
+                ctx.throw(400, `{ error: 'Invalid input', service: ${APP_SERVICE} }`);
+        }
+
     });
 
 // Register routes
