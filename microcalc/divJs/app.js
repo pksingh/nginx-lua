@@ -35,6 +35,9 @@ router
                 ctx.throw(400, `{ error: 'Invalid input', service: ${APP_SERVICE} }`);
         }
 
+        let [op1, op2] = ctx.request.body.operands;
+        console.log('Received', op1, op2);
+        ctx.body = "{data: 'ok'}";
     });
 
 // Register routes
