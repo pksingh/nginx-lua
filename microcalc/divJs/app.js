@@ -37,7 +37,12 @@ router
 
         let [op1, op2] = ctx.request.body.operands;
         console.log('Received', op1, op2);
-        ctx.body = "{data: 'ok'}";
+        ctx.status = 200;
+        ctx.body =`{
+            result: ${op1} / ${op2},
+            operands: [${op1}, ${op2}],
+            service: ${APP_SERVICE}
+        }`;
     });
 
 // Register routes
